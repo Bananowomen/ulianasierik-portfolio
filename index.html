@@ -357,7 +357,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 
 <div class="scrollbar" id="scrollbar"></div>
 <div class="fireflies" aria-hidden="true">
-  <span style="--l:79%;--t:14%;--s:4px;--d:9s;--dl:.2s"></span><span style="--l:83%;--t:19%;--s:3px;--d:11s;--dl:1.4s"></span><span style="--l:76%;--t:22%;--s:5px;--d:10s;--dl:2.1s"></span><span style="--l:86%;--t:12%;--s:3px;--d:8s;--dl:.8s"></span><span style="--l:9%;--t:57%;--s:4px;--d:12s;--dl:2.8s"></span><span style="--l:13%;--t:62%;--s:3px;--d:9s;--dl:1.1s"></span><span style="--l:7%;--t:66%;--s:5px;--d:11s;--dl:.5s"></span><span style="--l:16%;--t:59%;--s:3px;--d:10s;--dl:2.4s"></span><span style="--l:59%;--t:84%;--s:4px;--d:8s;--dl:1.7s"></span><span style="--l:63%;--t:88%;--s:3px;--d:12s;--dl:3s"></span><span style="--l:56%;--t:90%;--s:5px;--d:9s;--dl:1.9s"></span><span style="--l:66%;--t:82%;--s:3px;--d:11s;--dl:.9s"></span><span style="--l:30%;--t:36%;--s:3px;--d:10s;--dl:1.2s"></span><span style="--l:92%;--t:48%;--s:3px;--d:9s;--dl:2.6s"></span>
+  <span style="--l:4%;--t:12%;--s:4px;--d:9s;--dl:.2s"></span><span style="--l:7%;--t:26%;--s:3px;--d:11s;--dl:1.4s"></span><span style="--l:3%;--t:41%;--s:5px;--d:10s;--dl:2.1s"></span><span style="--l:8%;--t:55%;--s:3px;--d:8s;--dl:.8s"></span><span style="--l:5%;--t:70%;--s:4px;--d:12s;--dl:2.8s"></span><span style="--l:9%;--t:84%;--s:3px;--d:9s;--dl:1.1s"></span><span style="--l:4%;--t:93%;--s:4px;--d:11s;--dl:.5s"></span><span style="--l:94%;--t:10%;--s:3px;--d:10s;--dl:2.4s"></span><span style="--l:91%;--t:24%;--s:5px;--d:8s;--dl:1.7s"></span><span style="--l:96%;--t:39%;--s:3px;--d:12s;--dl:3s"></span><span style="--l:92%;--t:53%;--s:4px;--d:9s;--dl:1.9s"></span><span style="--l:95%;--t:68%;--s:3px;--d:11s;--dl:.9s"></span><span style="--l:90%;--t:82%;--s:4px;--d:10s;--dl:1.2s"></span><span style="--l:96%;--t:92%;--s:3px;--d:9s;--dl:2.6s"></span>
 </div>
 
 <div class="top">
@@ -654,7 +654,9 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 
   var flies=[].map.call(document.querySelectorAll('.fireflies span'),function(el){
     var r=el.getBoundingClientRect();
-    return {el:el,x:r.left,y:r.top,vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5};
+    var leftSide=r.left<window.innerWidth/2;
+    return {el:el,x:r.left,y:r.top,vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5,
+      minX:leftSide?8:window.innerWidth*.84, maxX:leftSide?window.innerWidth*.16:window.innerWidth-16};
   });
   if(flies.length && !reduceMotion){
     var mx=-9999,my=-9999;
@@ -673,9 +675,9 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
         var sp=Math.sqrt(f.vx*f.vx+f.vy*f.vy), max=2.4;
         if(sp>max){ f.vx=f.vx/sp*max; f.vy=f.vy/sp*max; }
         f.x+=f.vx; f.y+=f.vy;
-        if(f.x<8){ f.x=8; f.vx=Math.abs(f.vx); }
+        if(f.x<f.minX){ f.x=f.minX; f.vx=Math.abs(f.vx); }
         if(f.y<8){ f.y=8; f.vy=Math.abs(f.vy); }
-        if(f.x>window.innerWidth-16){ f.x=window.innerWidth-16; f.vx=-Math.abs(f.vx); }
+        if(f.x>f.maxX){ f.x=f.maxX; f.vx=-Math.abs(f.vx); }
         if(f.y>window.innerHeight-16){ f.y=window.innerHeight-16; f.vy=-Math.abs(f.vy); }
         f.el.style.left=f.x+'px';
         f.el.style.top=f.y+'px';
