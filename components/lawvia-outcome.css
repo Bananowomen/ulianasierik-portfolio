@@ -1,0 +1,40 @@
+﻿.case-art {
+  padding: clamp(16px, 3vw, 36px);
+}
+.lawvia-outcome {
+  width: 100%;
+  padding: clamp(20px, 3vw, 32px);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: white;
+}
+.lawvia-outcome h4 {
+  margin: 0 0 20px;
+  font-size: 22px;
+  line-height: 1.25;
+}
+.lawvia-outcome ol {
+  margin: 0;
+  padding-left: 1.4em;
+}
+.lawvia-outcome li {
+  padding-left: 4px;
+}
+.lawvia-outcome li + li {
+  margin-top: 20px;
+}
+.lawvia-outcome li::marker {
+  color: var(--blue-dark);
+  font-weight: 700;
+}
+.lawvia-outcome p {
+  margin: 6px 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+.lawvia-outcome a {
+  color: var(--blue-dark);
+  text-underline-offset: 3px;
+  font-size: 14px;
+  font-weight: 700;
+}
