@@ -1,0 +1,144 @@
+/* Site motion — restrained page-level affordances only.
+   Ordinary content is always immediately visible: no hidden/reveal states
+   on prose or panels. What remains: reading progress, nav orientation,
+   link/button feedback, form focus affordances, small row accents.
+   Never transforms scene ancestors (.google-story, .chatgpt-story,
+   .hero-visual, main.shell); hero floating layers belong to hero-motion. */
+
+/* ---- Reading progress (element is created by site-motion.js) ---- */
+.sm-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 90;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #1597e5, #59bbf2);
+  border-radius: 0 3px 3px 0;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
+@media print { .sm-progress { display: none; } }
+
+/* ---- Row accent: a static thin blue rule in each row gutter ---- */
+.service-row,
+.project-row,
+.tool-row,
+.step { position: relative; }
+.service-row::before,
+.project-row::before,
+.tool-row::before,
+.step::before {
+  content: '';
+  position: absolute;
+  left: -16px;
+  top: 14px;
+  bottom: 14px;
+  width: 3px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #1597e5, #9bd8fa);
+  opacity: .55;
+  pointer-events: none;
+}
+@media (max-width: 580px) {
+  .service-row::before,
+  .project-row::before,
+  .tool-row::before,
+  .step::before { left: -11px; }
+}
+.tool-number { color: #0b8bd6; }
+
+/* ---- Buttons, arrows, links — small, reversible feedback ---- */
+.button .arrow-svg {
+  transition: transform .25s cubic-bezier(.22, 1, .36, 1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .button:hover .arrow-svg,
+  .button:focus-visible .arrow-svg { transform: translateX(3px); }
+}
+.button:active { transform: translateY(0) scale(.98); }
+
+.nav a,
+.repo-link,
+.footer-links a {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1.5px;
+  transition:
+    background-size .35s cubic-bezier(.22, 1, .36, 1),
+    color .2s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .nav a:hover,
+  .repo-link:hover,
+  .footer-links a:hover { background-size: 100% 1.5px; }
+}
+.nav a:focus-visible,
+.repo-link:focus-visible,
+.footer-links a:focus-visible { background-size: 100% 1.5px; }
+
+.nav a.sm-current {
+  color: #1597e5;
+  background-size: 100% 1.5px;
+}
+
+/* Project "View scope" disclosure: answer fades up when opened. */
+.project-row summary { transition: color .2s ease; }
+.project-row details[open] > p {
+  animation: sm-detail .45s cubic-bezier(.22, 1, .36, 1) both;
+}
+@keyframes sm-detail {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile menu arriving (transform lives on .nav, not a sticky ancestor). */
+@media (max-width: 580px) {
+  .nav.open {
+    animation: sm-menu .3s cubic-bezier(.22, 1, .36, 1) both;
+  }
+  @keyframes sm-menu {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* ---- Form affordances ---- */
+.brief-form {
+  transition:
+    border-color .3s cubic-bezier(.22, 1, .36, 1),
+    box-shadow .3s cubic-bezier(.22, 1, .36, 1);
+}
+.brief-form:focus-within {
+  border-color: #bfe3f8;
+  box-shadow: 0 14px 34px rgba(21, 151, 229, .08);
+}
+.brief-form input,
+.brief-form textarea {
+  transition:
+    border-color .25s ease,
+    box-shadow .25s ease;
+}
+.brief-form input:focus,
+.brief-form textarea:focus {
+  border-color: #1597e5;
+  box-shadow: 0 0 0 4px rgba(21, 151, 229, .13);
+}
+.draft-result:not([hidden]) {
+  animation: sm-detail .5s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button .arrow-svg,
+  .nav a,
+  .repo-link,
+  .footer-links a,
+  .brief-form,
+  .brief-form input,
+  .brief-form textarea { transition: none !important; }
+  .project-row details[open] > p,
+  .draft-result:not([hidden]),
+  .nav.open { animation: none !important; }
+}
