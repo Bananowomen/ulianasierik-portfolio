@@ -1,0 +1,240 @@
+/* Site motion — restrained page-level affordances only.
+   Reading progress, nav orientation, link/button feedback, form focus
+   affordances, small row accents, a soft section reveal (JS-gated, so
+   no-JS content is always visible) and a gentle card hover lift.
+   Never transforms scene ancestors (.google-story, .chatgpt-story,
+   .hero-visual, main.shell); hero floating layers belong to hero-motion.
+   Reveal therefore never targets those scene roots or their ancestors. */
+
+/* ---- Reading progress (element is created by site-motion.js) ---- */
+.sm-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 90;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #185abd, #2b579a);
+  border-radius: 0 3px 3px 0;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
+@media print { .sm-progress { display: none; } }
+
+/* ---- Row accent: a static thin blue rule in each row gutter ---- */
+.service-row,
+.project-row,
+.tool-row,
+.step { position: relative; }
+.service-row::before,
+.project-row::before,
+.tool-row::before,
+.step::before {
+  content: '';
+  position: absolute;
+  left: -16px;
+  top: 14px;
+  bottom: 14px;
+  width: 3px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #185abd, #7fb3e8);
+  opacity: .55;
+  pointer-events: none;
+}
+@media (max-width: 580px) {
+  .service-row::before,
+  .project-row::before,
+  .tool-row::before,
+  .step::before { left: -11px; }
+}
+.tool-number { color: #185abd; }
+
+/* ---- Buttons, arrows, links — small, reversible feedback ---- */
+.button .arrow-svg {
+  transition: transform .25s cubic-bezier(.22, 1, .36, 1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .button:hover .arrow-svg,
+  .button:focus-visible .arrow-svg { transform: translateX(3px); }
+}
+.button:active { transform: translateY(0) scale(.98); }
+
+.nav a,
+.repo-link,
+.footer-links a {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1.5px;
+  transition:
+    background-size .35s cubic-bezier(.22, 1, .36, 1),
+    color .2s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .nav a:hover,
+  .repo-link:hover,
+  .footer-links a:hover { background-size: 100% 1.5px; }
+}
+.nav a:focus-visible,
+.repo-link:focus-visible,
+.footer-links a:focus-visible { background-size: 100% 1.5px; }
+
+.nav a.sm-current {
+  color: #185abd;
+  background-size: 100% 1.5px;
+}
+
+/* Project "View scope" disclosure: answer fades up when opened. */
+.project-row summary { transition: color .2s ease; }
+.project-row details[open] > p {
+  animation: sm-detail .45s cubic-bezier(.22, 1, .36, 1) both;
+}
+@keyframes sm-detail {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile menu arriving (transform lives on .nav, not a sticky ancestor). */
+@media (max-width: 580px) {
+  .nav.open {
+    animation: sm-menu .3s cubic-bezier(.22, 1, .36, 1) both;
+  }
+  @keyframes sm-menu {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* ---- Form affordances ---- */
+.brief-form {
+  transition:
+    border-color .3s cubic-bezier(.22, 1, .36, 1),
+    box-shadow .3s cubic-bezier(.22, 1, .36, 1);
+}
+.brief-form:focus-within {
+  border-color: #c7d9ef;
+  box-shadow: 0 14px 34px rgba(24, 90, 189, .08);
+}
+.brief-form input,
+.brief-form textarea {
+  transition:
+    border-color .25s ease,
+    box-shadow .25s ease;
+}
+.brief-form input:focus,
+.brief-form textarea:focus {
+  border-color: #185abd;
+  box-shadow: 0 0 0 4px rgba(24, 90, 189, .13);
+}
+.draft-result:not([hidden]) {
+  animation: sm-detail .5s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+/* ---- Soft section reveal (class added by site-motion.js only) ----
+   Without JS, or without IntersectionObserver, or under reduced motion,
+   nothing is ever hidden: .js-motion is only added by the JS that can
+   also reveal, and it reveals everything already in view at once. */
+.js-motion .reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity .65s cubic-bezier(.22, 1, .36, 1),
+    transform .65s cubic-bezier(.22, 1, .36, 1),
+    box-shadow .35s cubic-bezier(.22, 1, .36, 1),
+    border-color .35s cubic-bezier(.22, 1, .36, 1);
+}
+.js-motion .reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- Gentle hover lift for cards / rows (pointer devices only) ---- */
+.featured-case,
+.role,
+.service-row {
+  transition:
+    transform .35s cubic-bezier(.22, 1, .36, 1),
+    box-shadow .35s cubic-bezier(.22, 1, .36, 1),
+    border-color .35s cubic-bezier(.22, 1, .36, 1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .featured-case:hover,
+  .js-motion .featured-case.reveal.visible:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 36px rgba(15, 76, 154, .10);
+  }
+  .role:hover,
+  .js-motion .role.reveal.visible:hover,
+  .service-row:hover,
+  .js-motion .service-row.reveal.visible:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* ---- Logo-style decor: blue dot + thin ring/arc (uliana. motif) ----
+   Purely decorative: aria-hidden in markup, never interactive. */
+.logo-decor {
+  display: inline-flex;
+  flex: none;
+  pointer-events: none;
+  color: #185abd;
+}
+.logo-decor svg { display: block; overflow: visible; }
+.logo-decor--footer {
+  width: 26px;
+  height: 26px;
+  margin-left: 10px;
+  vertical-align: -7px;
+  opacity: .72;
+}
+.logo-decor--contact {
+  position: absolute;
+  right: 30px;
+  bottom: 20px;
+  width: 46px;
+  height: 46px;
+  opacity: .42;
+  z-index: 0;
+  animation: sm-decor-drift 9s ease-in-out infinite alternate;
+}
+.contact .contact-grid { position: relative; z-index: 1; }
+@keyframes sm-decor-drift {
+  from { transform: translateY(0) rotate(0deg); }
+  to { transform: translateY(-4px) rotate(4deg); }
+}
+@media (max-width: 580px) {
+  .logo-decor--footer { width: 21px; height: 21px; margin-left: 7px; }
+  .logo-decor--contact {
+    width: 30px;
+    height: 30px;
+    right: 14px;
+    bottom: 12px;
+    opacity: .30;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button .arrow-svg,
+  .nav a,
+  .repo-link,
+  .footer-links a,
+  .brief-form,
+  .brief-form input,
+  .brief-form textarea,
+  .featured-case,
+  .role,
+  .service-row { transition: none !important; }
+  .project-row details[open] > p,
+  .draft-result:not([hidden]),
+  .nav.open,
+  .logo-decor--contact { animation: none !important; }
+  .js-motion .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .featured-case:hover,
+  .role:hover,
+  .service-row:hover { transform: none !important; }
+}

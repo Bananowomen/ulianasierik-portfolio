@@ -1,0 +1,220 @@
+/* Hero floating search UI — layered depth, arrival, float and pointer parallax.
+   Channels never fight: parallax owns `translate`, tilt owns `rotate`,
+   arrival owns `opacity`/`scale`, the idle bob owns `transform`. */
+.hero-visual .floating-ui,
+.hero-visual .hero-query,
+.hero-visual .hero-mark {
+  --float-tilt: -5deg;
+  --float-depth: 1;
+  --float-lift: -9px;
+  --float-drift: 4px;
+  --float-turn: 1.4deg;
+  --float-dur: 8.6s;
+  --float-phase: -1.2s;
+  --float-rturn: 1.1deg;
+  --rest-scale: 1;
+  --enter-delay: 0s;
+  --hero-px: 0px;
+  --hero-py: 0px;
+  translate: calc(var(--hero-px) * var(--float-depth)) calc(var(--hero-py) * var(--float-depth));
+  rotate: calc(var(--float-tilt) + var(--hero-nx, 0) * var(--float-rturn));
+  scale: var(--rest-scale);
+  animation: hero-search-float var(--float-dur) ease-in-out var(--float-phase) infinite;
+  animation-play-state: paused;
+  pointer-events: none;
+  will-change: auto;
+}
+/* One-shot arrival, gated behind a JS-added class so no-JS stays static. */
+.hero-visual.hero-enter .floating-ui,
+.hero-visual.hero-enter .hero-query,
+.hero-visual.hero-enter .hero-mark {
+  animation:
+    hero-arrive .95s cubic-bezier(.22, 1, .36, 1) var(--enter-delay) both,
+    hero-search-float var(--float-dur) ease-in-out calc(var(--enter-delay) + .95s + var(--float-phase)) infinite;
+}
+/* Play state is declared after the shorthand above so pausing wins offscreen. */
+.hero-visual.hero-enter .floating-ui,
+.hero-visual.hero-enter .hero-query,
+.hero-visual.hero-enter .hero-mark,
+.hero-visual.hero-enter .floating-ui::after { animation-play-state: paused; }
+.hero-visual.hero-motion-active .floating-ui,
+.hero-visual.hero-motion-active .hero-query,
+.hero-visual.hero-motion-active .hero-mark,
+.hero-visual.hero-motion-active .floating-ui::after {
+  animation-play-state: running;
+  will-change: transform;
+}
+
+/* Depth: the Google card is nearest, the AI card and far marks sit back. */
+.hero-visual .floating-ui {
+  border-color: #eef4f9;
+  box-shadow: 0 24px 48px #35495717, 0 5px 14px #3549570f, inset 0 1px 0 #ffffff;
+  overflow: hidden;
+}
+.hero-visual .floating-ui.second {
+  --float-tilt: 5deg;
+  --float-depth: -.72;
+  --float-lift: 8px;
+  --float-drift: -5px;
+  --float-turn: -1.3deg;
+  --float-dur: 10.2s;
+  --float-phase: -4s;
+  --float-rturn: -1deg;
+  --rest-scale: .97;
+  --enter-delay: .14s;
+  box-shadow: 0 16px 36px #35495712, 0 4px 11px #3549570a, inset 0 1px 0 #ffffff;
+}
+.hero-visual .floating-ui .floating-line {
+  background: rgba(255, 255, 255, .28);
+}
+.hero-visual .floating-ui.floating-chip {
+  border-color: rgba(255, 255, 255, .28);
+  box-shadow: 0 22px 44px #0f4c9a38, 0 5px 14px #0f4c9a22, inset 0 1px 0 rgba(255, 255, 255, .35);
+}
+.hero-visual .floating-ui::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(105deg, transparent 35%, #ffffff9e 50%, transparent 65%);
+  background-size: 280% 100%;
+  background-position: 130% 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.hero-visual.hero-enter .floating-ui::after {
+  animation: hero-sheen 1.25s ease-out calc(var(--enter-delay) + .55s) both;
+}
+
+/* The aura counter-drifts a few px so the portrait plane separates from the backdrop. */
+.hero-visual .portrait-aura {
+  background: radial-gradient(120% 90% at 50% 0%, #eef4fb 0%, #eef4f8 56%, #d6e4f2 100%);
+  translate: calc(var(--hero-px, 0px) * -.16) calc(var(--hero-py, 0px) * -.1);
+}
+
+.hero-query {
+  position: absolute;
+  z-index: 4;
+  left: 3%;
+  bottom: 19%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 18px;
+  border: 1px solid #d6e4f2;
+  border-radius: 30px;
+  background: var(--white);
+  box-shadow: 0 16px 36px #0f4c9a1a, 0 4px 11px #0f4c9a0f, inset 0 1px 0 #ffffff;
+  color: #344d60;
+  font: 600 13px/1.4 var(--body, Arial, sans-serif);
+  white-space: nowrap;
+}
+.hero-query svg { flex-shrink: 0; color: var(--blue-dark); }
+.hero-visual .hero-query {
+  --float-tilt: -3deg;
+  --float-depth: .48;
+  --float-lift: -6px;
+  --float-drift: -3px;
+  --float-turn: .9deg;
+  --float-dur: 11s;
+  --float-phase: -6s;
+  --float-rturn: .7deg;
+  --rest-scale: .98;
+  --enter-delay: .28s;
+}
+
+.hero-mark { position: absolute; z-index: 3; display: block; width: 40px; height: 40px; filter: drop-shadow(0 10px 14px #0f4c9a26); }
+.hero-mark svg { width: 100%; height: 100%; overflow: visible; }
+.hero-visual .hero-mark-sphere {
+  top: 6%; right: 7%; width: 58px; height: 58px;
+  --float-tilt: 6deg;
+  --float-depth: -.5;
+  --float-lift: -9px;
+  --float-drift: 3px;
+  --float-turn: 5deg;
+  --float-dur: 12s;
+  --float-phase: -3s;
+  --float-rturn: -1.2deg;
+  --rest-scale: .96;
+  --enter-delay: .38s;
+  filter: drop-shadow(0 10px 16px #0f4c9a33);
+}
+.hero-visual .hero-mark-cube {
+  top: 44%; left: 1%; width: 38px; height: 38px;
+  --float-tilt: -8deg;
+  --float-depth: .68;
+  --float-lift: 7px;
+  --float-drift: -3px;
+  --float-turn: -6deg;
+  --float-dur: 9.4s;
+  --float-phase: -2s;
+  --float-rturn: 1.2deg;
+  --rest-scale: .97;
+  --enter-delay: .46s;
+  filter: drop-shadow(0 9px 14px #0f4c9a2b);
+}
+.hero-visual .hero-mark-spark {
+  top: 29%; left: 7%; width: 22px; height: 22px;
+  --float-tilt: 0deg;
+  --float-depth: -.25;
+  --float-lift: -5px;
+  --float-drift: 2px;
+  --float-turn: 12deg;
+  --float-dur: 10.5s;
+  --float-phase: -5s;
+  --float-rturn: -2deg;
+  --rest-scale: .92;
+  --enter-delay: .62s;
+  filter: drop-shadow(0 6px 9px #0f4c9a1a);
+}
+
+@keyframes hero-search-float {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  35% { transform: translate3d(calc(var(--float-drift) * .45), calc(var(--float-lift) * .65), 0) rotate(calc(var(--float-turn) * .55)); }
+  60% { transform: translate3d(var(--float-drift), var(--float-lift), 0) rotate(var(--float-turn)); }
+  82% { transform: translate3d(calc(var(--float-drift) * .25), calc(var(--float-lift) * .3), 0) rotate(calc(var(--float-turn) * -.25)); }
+}
+@keyframes hero-arrive {
+  from { opacity: 0; scale: calc(var(--rest-scale) * .88); }
+  to { opacity: 1; scale: var(--rest-scale); }
+}
+@keyframes hero-sheen {
+  0% { background-position: 130% 0; opacity: 0; }
+  18% { opacity: .85; }
+  100% { background-position: -60% 0; opacity: 0; }
+}
+
+@media (max-width: 1100px) {
+  .hero-visual .hero-mark-sphere { width: 44px; height: 44px; }
+  .hero-visual .hero-mark-cube { width: 30px; height: 30px; }
+  .hero-visual .hero-mark-spark { width: 18px; height: 18px; top: 27%; left: 5%; }
+}
+@media (max-width: 800px) and (min-width: 581px) {
+  .hero-visual { overflow: hidden; }
+  .hero-visual .floating-ui:not(.second) { left: 8%; }
+  .hero-visual .hero-mark-cube { display: none; }
+  .hero-visual .hero-mark-sphere { top: 16%; right: 3%; width: 36px; height: 36px; }
+  .hero-visual .hero-mark-spark { display: none; }
+}
+@media (max-width: 580px) {
+  .hero-visual .floating-ui:not(.second) { top: 5%; left: 3%; width: 138px; padding: 11px; }
+  .hero-visual .floating-ui.second { display: none; }
+  .hero-visual .hero-mark-sphere { width: 34px; height: 34px; right: 8%; top: 6%; }
+  .hero-visual .hero-mark-cube { width: 26px; height: 26px; top: 46%; left: 5%; }
+  .hero-visual .hero-mark-spark { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-visual .floating-ui,
+  .hero-visual .hero-query,
+  .hero-visual .hero-mark {
+    animation: none !important;
+    transition: none !important;
+    translate: 0px 0px;
+    rotate: var(--float-tilt);
+    scale: var(--rest-scale);
+    transform: none;
+    opacity: 1;
+  }
+  .hero-visual .floating-ui::after { display: none; }
+  .hero-visual .portrait-aura { translate: 0px 0px; }
+}
