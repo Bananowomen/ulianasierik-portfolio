@@ -31,7 +31,10 @@ form?.addEventListener('submit', event => {
   const data = new FormData(form);
   const url = data.get('url').trim();
   const goal = data.get('problem').trim();
-  draft.value = `Dobrý deň, posielam vám stránku našej služby.\n${url}\n\n${goal}\n\nČo by ste na stránke upravili ako prvé?`;
+  const email = data.get('email').trim();
+  const phone = data.get('phone').trim();
+  const contactLine = phone ? `\nKontakt: ${email}, ${phone}` : `\nKontakt: ${email}`;
+  draft.value = `Dobrý deň, posielam vám stránku našej služby.\n${url}\n\n${goal}\n${contactLine}\n\nČo by ste na stránke upravili ako prvé?`;
   document.getElementById('draft-result').hidden = false;
   status.textContent = copy.draftReady;
   draft.focus();

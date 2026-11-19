@@ -99,13 +99,13 @@
   padding: 13px 18px;
   border: 1px solid #e6f0f8;
   border-radius: 30px;
-  background: #fff;
+  background: var(--white);
   box-shadow: 0 16px 36px #3d6b8d17, 0 4px 11px #3d6b8d0d, inset 0 1px 0 #ffffff;
   color: #344d60;
   font: 600 13px/1.4 var(--body, Arial, sans-serif);
   white-space: nowrap;
 }
-.hero-query svg { flex-shrink: 0; color: #1597e5; }
+.hero-query svg { flex-shrink: 0; color: var(--blue-dark); }
 .hero-visual .hero-query {
   --float-tilt: -3deg;
   --float-depth: .48;
@@ -211,7 +211,7 @@
 @media (max-width: 580px) {
   .hero-visual .floating-ui:not(.second) { top: 5%; left: 3%; width: 132px; padding: 11px; }
   .hero-visual .floating-ui.second { display: none; }
-  .hero-query { left: 4%; bottom: 19%; font-size: 12px; padding: 10px 13px; gap: 7px; }
+  .hero-query { left: 4%; bottom: 29%; font-size: 12px; padding: 10px 13px; gap: 7px; }
   .hero-query svg { width: 14px; height: 14px; }
   .hero-visual .hero-mark-ring { width: 28px; height: 28px; right: 8%; top: 6%; }
   .hero-visual .hero-mark-shard { width: 22px; height: 26px; top: 45%; left: 5%; }
