@@ -5,9 +5,7 @@
 .chatgpt-story .cs-stage{max-width:1040px;margin:auto;padding:32px 36px;display:grid;grid-template-columns:460px minmax(0,1fr);grid-template-areas:"narrative device" "note device";column-gap:40px;row-gap:0;align-content:start;align-items:center}
 .chatgpt-story .cs-controls{display:none;gap:10px;margin-top:16px}
 .chatgpt-story.is-animated .cs-controls{display:flex}
-.chatgpt-story .cs-btn{appearance:none;border:1px solid #cfe3f2;background:#fff;color:#2c4a5e;font-size:13px;font-weight:700;line-height:1;padding:9px 14px;border-radius:99px;cursor:pointer;transition:background .2s ease,border-color .2s ease}
-.chatgpt-story .cs-btn:hover{background:#eaf5fd;border-color:#9ed6f8}
-.chatgpt-story .cs-btn:focus-visible{outline:2px solid var(--cs-blue);outline-offset:2px}
+.chatgpt-story .cs-btn:focus-visible{outline:3px solid #0676be;outline-offset:3px}
 .chatgpt-story .cs-narrative{position:relative;min-width:0;grid-area:narrative;align-self:end}
 .chatgpt-story .cs-phone-stack{display:contents}
 .chatgpt-story .cs-phase-note{grid-area:note;align-self:start}
@@ -77,7 +75,7 @@
 .chatgpt-story [data-cs-stream].cs-streaming .cs-word.cs-caret::after{content:"";display:inline-block;width:2px;height:.95em;background:var(--cs-blue);margin-left:2px;vertical-align:-.12em;border-radius:2px;animation:cs-caret .75s step-end infinite}
 .chatgpt-story .cs-firm.cs-firm-active{background:#f3f9fd;border-color:#d8ecfa;box-shadow:0 4px 16px rgba(21,151,229,.08)}
 .chatgpt-story .cs-firm.cs-firm-active .cs-source-pill{background:#e3f2fd;color:#256b93}
-.chatgpt-story.is-animated .cs-firm{opacity:0;transform:translateY(8px);transition:opacity .26s ease,transform .32s cubic-bezier(.2,.65,.3,1)}
+.chatgpt-story.is-animated .cs-firm{opacity:0;transform:translateY(8px);transition:opacity .26s ease,transform .32s cubic-bezier(.2,.65,.3,1),background-color .4s ease,border-color .4s ease,box-shadow .4s ease,margin .4s ease,padding .4s ease}
 .chatgpt-story.is-animated.cs-show-first .cs-firm-one,.chatgpt-story.is-animated.cs-show-second .cs-firm-two,.chatgpt-story.is-animated.cs-show-third .cs-firm-three{opacity:1;transform:translateY(0)}
 .chatgpt-story.is-animated.cs-show-thinking .cs-thinking{display:flex;animation:cs-thinking-in .3s ease both}
 .chatgpt-story.is-animated.cs-is-generating .cs-generating{display:flex}
@@ -109,7 +107,7 @@
 .chatgpt-story .cs-browser-name{font-size:22px;line-height:1.2;letter-spacing:-.02em;color:#202123}
 .chatgpt-story .cs-browser-tag{font-size:14px;font-weight:600;color:#0d9488;margin-top:4px}
 .chatgpt-story .cs-browser-body p{font-size:14px;line-height:1.55;color:#5f666d;margin:10px 0 0}
-.chatgpt-story .cs-browser-cta{display:inline-block;margin-top:16px;background:#1597e5;color:#fff;font-size:14px;font-weight:700;border-radius:99px;padding:10px 18px}
+.chatgpt-story .cs-browser-cta{display:inline-block;margin-top:16px;background:var(--cs-blue-dark);color:#fff;font-size:14px;font-weight:700;border-radius:99px;padding:10px 18px}
 .chatgpt-story .cs-browser-note{font-size:11px;color:#84939b;margin-top:14px}
 .chatgpt-story.is-animated .cs-followup,.chatgpt-story.is-animated .cs-reply{opacity:0;transform:translateY(8px);transition:opacity .3s ease,transform .35s cubic-bezier(.2,.65,.3,1)}
 .chatgpt-story.is-animated.cs-show-followup .cs-followup,.chatgpt-story.is-animated.cs-show-reply .cs-reply{opacity:1;transform:translateY(0)}
@@ -241,7 +239,7 @@ main .chatgpt-story.is-animated .cs-device{margin:0;border-radius:30px;box-shado
 .chatgpt-story .cs-firm h3{font-size:15px;line-height:1.4}
 .chatgpt-story .cs-firm p{font-size:14px;line-height:1.5}
 .chatgpt-story .cs-source-pill{display:none}
-.chatgpt-story .cs-firm.cs-selected{background:#f1f9f6;border-bottom-color:#a7dace;border-radius:8px;box-shadow:none}
+.chatgpt-story .cs-firm.cs-selected{background:#e6f7f1;border-bottom-color:transparent;border-radius:10px;box-shadow:inset 4px 0 0 #189c7e,0 4px 14px rgba(24,156,126,.18);padding-left:12px;margin-left:-12px;margin-right:0}
 .chatgpt-story .cs-composer{height:44px;min-height:44px;font-size:12px;gap:8px;margin-top:10px}
 .chatgpt-story .cs-composer-text{font-size:12px}
 .chatgpt-story .cs-home-indicator{margin-top:10px}
@@ -252,11 +250,11 @@ main .chatgpt-story.is-animated .cs-device{margin:0;border-radius:30px;box-shado
 .chatgpt-story.is-animated .cs-phase-note{height:64px;max-width:none;margin:0;padding:0;border:0;background:transparent;box-shadow:none;border-radius:0;position:relative}
 .chatgpt-story.is-animated .cs-phase-note p{inset:14px 0 auto;font:600 14px/1.6 Manrope,Arial,sans-serif;color:#3f5262;transform:none}
 .chatgpt-story.is-animated[data-cs-phase='intent'] .cs-phase-note{border:0;box-shadow:none}
-.chatgpt-story .cs-toolbar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:6px}
-.chatgpt-story .cs-illustrative{font-size:10px;color:#74818c}
-.chatgpt-story .cs-controls{gap:12px;margin:0}
-.chatgpt-story .cs-btn{min-height:40px;border:0;background:transparent;padding:5px 0;color:#526574;font:600 11px/1.4 Manrope,Arial,sans-serif;border-radius:0;text-decoration:underline;text-decoration-color:#cad6df;text-underline-offset:4px}
-.chatgpt-story .cs-btn:hover{background:transparent;color:#0786d2}
+.chatgpt-story .cs-toolbar{display:flex;align-items:center;justify-content:flex-start;gap:8px;margin-top:6px}
+.chatgpt-story .cs-illustrative{font-size:10px;color:#5f707c}
+.chatgpt-story .cs-controls,.chatgpt-story.is-animated .cs-controls{display:none}
+.chatgpt-story .cs-btn{min-height:44px;border:0;background:transparent;padding:6px 10px;color:#526574;font:700 12px/1.4 Manrope,Arial,sans-serif;border-radius:8px;text-decoration:underline;text-decoration-color:#cad6df;text-underline-offset:4px;cursor:pointer;transition:color .2s}
+.chatgpt-story .cs-btn:hover{background:transparent;color:#0676be}.chatgpt-story .cs-btn:active{color:#055a8f}.chatgpt-story .cs-btn:disabled{opacity:.45;cursor:not-allowed}
 .cs-explain-arrow{display:none;position:absolute;z-index:9;width:116px;font:600 13px/1.5 Manrope,Arial,sans-serif;color:#1765a3;pointer-events:none}
 .cs-explain-arrow svg{position:absolute;right:calc(100% + 8px);top:50%;transform:translateY(-50%);width:36px;height:14px;overflow:visible}
 .chatgpt-story.is-animated .cs-explain-arrow{display:block}
@@ -265,3 +263,7 @@ main .chatgpt-story.is-animated .cs-device{margin:0;border-radius:30px;box-shado
 @media(max-width:1000px){.chatgpt-story{padding:30px 26px}.chatgpt-story .cs-stage{display:block;max-width:660px}.chatgpt-story .cs-narrative{padding:0}.chatgpt-story .cs-narrative h2{font-size:40px}.chatgpt-story .cs-explainer{font-size:16px;margin-top:18px}.chatgpt-story .cs-takeaway{font-size:22px;margin-top:22px}.chatgpt-story .cs-phone-stack{display:block;margin-top:30px}.chatgpt-story .cs-device-column{padding:0;width:fit-content;max-width:100%;margin:auto}.chatgpt-story.is-animated .cs-playback{margin-inline:auto}.chatgpt-story.is-animated .cs-phase-note{height:64px;position:relative;align-self:auto}.chatgpt-story.is-animated .cs-phase-note p{inset:14px 0 auto}.chatgpt-story:not(.is-animated) .cs-device{max-width:376px}}
 @media(max-width:580px){.chatgpt-story{border-radius:24px;padding:28px 16px 22px;margin-bottom:16px}.chatgpt-story .cs-eyebrow{font-size:9px;letter-spacing:.1em;margin-bottom:15px}.chatgpt-story .cs-narrative h2{font-size:34px}.chatgpt-story .cs-explainer{font-size:15.5px;line-height:1.8}.chatgpt-story .cs-takeaway{font-size:20px;line-height:1.55}.chatgpt-story .cs-phone-stack{margin-top:26px}.chatgpt-story.is-animated .cs-phase-note p{font-size:13.5px}.chatgpt-story .cs-controls{gap:10px}}
 @media(prefers-reduced-motion:reduce){.chatgpt-story .cs-playback,.chatgpt-story .cs-explain-arrow{display:none!important}}
+@media(max-width:1000px){.chatgpt-story.is-animated .cs-explain-arrow{display:none}}
+.chatgpt-story:not(.is-animated) .cs-playback{display:block;width:min(390px,100%);margin:20px auto 0}
+.chatgpt-story:not(.is-animated) .cs-progress{display:none}
+@media(max-width:860px){.chatgpt-story .cs-firm{grid-template-columns:36px minmax(0,1fr);gap:9px;padding:7px 0;margin:0 0 4px}}
