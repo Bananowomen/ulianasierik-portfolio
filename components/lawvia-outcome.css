@@ -5,9 +5,10 @@
 @media(max-width:580px){.case-art{padding:14px}}
 .lawvia-outcome {
   width: 100%;
+  height: 100%;
   max-width: 500px;
   margin-inline: auto;
-  padding: var(--space-28);
+  padding: 32px;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   background: var(--white);

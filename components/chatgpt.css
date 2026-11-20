@@ -1,11 +1,11 @@
-.chatgpt-story{--cs-ink:#26313b;--cs-blue:#185abd;--cs-blue-dark:#0f4c9a;--cs-muted:#687784;--cs-progress:0;position:relative;color:var(--cs-ink);background:#edf2f6;border-radius:36px;margin:0 auto 28px;font-family:inherit;isolation:isolate}
+.chatgpt-story{--cs-ink:#26313b;--cs-blue:#1a65d6;--cs-blue-dark:#155bb5;--cs-muted:#687784;--cs-progress:0;position:relative;color:var(--cs-ink);background:#edf2f6;border-radius:36px;margin:0 auto 28px;font-family:inherit;isolation:isolate}
 .chatgpt-story *{box-sizing:border-box}
 .chatgpt-story:not(.is-animated){min-height:0}
 .chatgpt-story .cs-sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .chatgpt-story .cs-stage{max-width:1040px;margin:auto;padding:32px 36px;display:grid;grid-template-columns:460px minmax(0,1fr);grid-template-areas:"narrative device" "note device";column-gap:40px;row-gap:0;align-content:start;align-items:center}
 .chatgpt-story .cs-controls{display:none;gap:10px;margin-top:16px}
 .chatgpt-story.is-animated .cs-controls{display:flex}
-.chatgpt-story .cs-btn:focus-visible{outline:3px solid #0f4c9a;outline-offset:3px}
+.chatgpt-story .cs-btn:focus-visible{outline:3px solid #155bb5;outline-offset:3px}
 .chatgpt-story .cs-narrative{position:relative;min-width:0;grid-area:narrative;align-self:end}
 .chatgpt-story .cs-phone-stack{display:contents}
 .chatgpt-story .cs-phase-note{grid-area:note;align-self:start}
@@ -74,7 +74,7 @@
 .chatgpt-story.is-animated .cs-word.is-on{opacity:1;transform:translateY(0)}
 .chatgpt-story [data-cs-stream].cs-streaming .cs-word.cs-caret::after{content:"";display:inline-block;width:2px;height:.95em;background:var(--cs-blue);margin-left:2px;vertical-align:-.12em;border-radius:2px;animation:cs-caret .75s step-end infinite}
 .chatgpt-story .cs-firm.cs-firm-active{background:#eef4fb;border-color:#d0dff2;box-shadow:0 4px 16px rgba(24,90,189,.08)}
-.chatgpt-story .cs-firm.cs-firm-active .cs-source-pill{background:#dbe8f7;color:#0f4c9a}
+.chatgpt-story .cs-firm.cs-firm-active .cs-source-pill{background:#dbe8f7;color:#155bb5}
 .chatgpt-story.is-animated .cs-firm{opacity:0;transform:translateY(8px);transition:opacity .26s ease,transform .32s cubic-bezier(.2,.65,.3,1),background-color .4s ease,border-color .4s ease,box-shadow .4s ease,margin .4s ease,padding .4s ease}
 .chatgpt-story.is-animated.cs-show-first .cs-firm-one,.chatgpt-story.is-animated.cs-show-second .cs-firm-two,.chatgpt-story.is-animated.cs-show-third .cs-firm-three{opacity:1;transform:translateY(0)}
 .chatgpt-story.is-animated.cs-show-thinking .cs-thinking{display:flex;animation:cs-thinking-in .3s ease both}
@@ -221,7 +221,7 @@
 .chatgpt-story{background:#fff;border-radius:32px;padding:44px 36px 32px;margin-bottom:24px}
 .chatgpt-story .cs-stage{max-width:1100px;padding:0;display:grid;grid-template-columns:440px minmax(0,1fr);grid-template-areas:'copy visual';gap:56px;align-items:start}
 .chatgpt-story .cs-narrative{grid-area:copy;padding-top:16px;align-self:start}
-.chatgpt-story .cs-eyebrow{font:800 11px/1.7 Manrope,Arial,sans-serif;letter-spacing:.12em;color:#185abd;margin-bottom:20px}
+.chatgpt-story .cs-eyebrow{font:800 11px/1.7 Manrope,Arial,sans-serif;letter-spacing:.12em;color:#1a65d6;margin-bottom:20px}
 .chatgpt-story .cs-narrative h2{font:800 clamp(36px,3.5vw,49px)/1.12 Archivo,Arial,sans-serif;letter-spacing:-.045em;margin:0}
 .chatgpt-story .cs-explainer{max-width:none;font:500 17px/1.8 Manrope,Arial,sans-serif;color:#546370;margin:24px 0 0}
 .chatgpt-story .cs-takeaway{font:700 22px/1.5 Manrope,Arial,sans-serif;letter-spacing:-.025em;margin:28px 0 0}
@@ -255,8 +255,8 @@ main .chatgpt-story.is-animated .cs-device{margin:0;border-radius:30px;box-shado
 .chatgpt-story .cs-illustrative{font-size:10px;color:#5f707c}
 .chatgpt-story .cs-controls,.chatgpt-story.is-animated .cs-controls{display:none}
 .chatgpt-story .cs-btn{min-height:44px;border:0;background:transparent;padding:6px 10px;color:#526574;font:700 12px/1.4 Manrope,Arial,sans-serif;border-radius:8px;text-decoration:underline;text-decoration-color:#cad6df;text-underline-offset:4px;cursor:pointer;transition:color .2s}
-.chatgpt-story .cs-btn:hover{background:transparent;color:#0f4c9a}.chatgpt-story .cs-btn:active{color:#0b3d7a}.chatgpt-story .cs-btn:disabled{opacity:.45;cursor:not-allowed}
-.cs-explain-arrow{display:none;position:absolute;z-index:9;width:116px;font:600 13px/1.5 Manrope,Arial,sans-serif;color:#0f4c9a;pointer-events:none}
+.chatgpt-story .cs-btn:hover{background:transparent;color:#155bb5}.chatgpt-story .cs-btn:active{color:#0f4c9a}.chatgpt-story .cs-btn:disabled{opacity:.45;cursor:not-allowed}
+.cs-explain-arrow{display:none;position:absolute;z-index:9;width:116px;font:600 13px/1.5 Manrope,Arial,sans-serif;color:#155bb5;pointer-events:none}
 .cs-explain-arrow svg{position:absolute;right:calc(100% + 8px);top:50%;transform:translateY(-50%);width:36px;height:14px;overflow:visible}
 .chatgpt-story.is-animated .cs-explain-arrow{display:block}
 @media(min-width:1200px){.chatgpt-story .cs-device-column{padding-right:142px}}
@@ -271,5 +271,7 @@ main .chatgpt-story.is-animated .cs-device{margin:0;border-radius:30px;box-shado
 @media(max-width:860px){.chatgpt-story .cs-firm{grid-template-columns:36px minmax(0,1fr);gap:9px;padding:7px 0;margin:0 0 4px}}
 @media(max-width:1000px){.chatgpt-story .cs-stage{display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:none;max-width:660px;gap:0}.chatgpt-story .cs-narrative{display:contents;padding:0}.chatgpt-story .cs-phone-stack,.chatgpt-story.is-animated .cs-phone-stack{display:contents;margin-top:0}.chatgpt-story .cs-device-column{order:1;padding:0;width:fit-content;max-width:100%;margin:30px auto 0}.chatgpt-story .cs-playback,.chatgpt-story.is-animated .cs-playback{order:2;margin:24px 0 0;max-width:100%;width:100%}}
 
-.chatgpt-story .cs-playback,.chatgpt-story.is-animated .cs-playback{width:100%;max-width:440px;margin:20px 0 0}
+.chatgpt-story .cs-playback,.chatgpt-story.is-animated .cs-playback{width:100%;max-width:440px;margin:16px 0 0}
 @media(min-width:1200px){.chatgpt-story .cs-device-column{padding-right:0}}
+.chatgpt-story .cs-toolbar{margin-top:8px}
+@media(max-width:1000px){.chatgpt-story .cs-playback,.chatgpt-story.is-animated .cs-playback{margin:8px 0 0}}
