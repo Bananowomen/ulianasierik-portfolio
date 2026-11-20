@@ -158,9 +158,9 @@ main .chatgpt-story.is-animated .cs-device{--cs-frame-h:var(--demo-phone-height)
 @media(max-width:580px){.contact-meta dd{white-space:normal}.section-heading>p{padding-top:0}}
 
 /* --- UI/UX pass: letter axis, service cards, method lede, contact rhythm --- */
-.letter{display:grid;grid-template-columns:minmax(0,760px);gap:16px;padding-block:56px;text-align:left}
+.letter{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;padding-block:56px;text-align:left}
 .letter-label{grid-column:1}
-.letter-content{grid-column:1;max-width:760px;justify-self:start;text-align:left}
+.letter-content{grid-column:1;max-width:none;width:100%;justify-self:stretch;text-align:left}
 .letter-content h2{margin-bottom:24px}
 .letter-content .signature{margin-top:24px}
 .letter-arrow{top:24px;right:40px;width:136px;transform:rotate(4deg);opacity:.38}
